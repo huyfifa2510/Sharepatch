@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T99ADDON</title>
+    <style>
+        /* 1. Biến số và Thiết lập chung */
+        :root {
+            --bg-body: #ffffff;
+            --accent-red: #da251d;
+            --vn-gold: #cba102;
+            --text-dark: #1a1a1a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-smooth: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            min-height: 100vh;
+            /* Thiết lập ảnh nền */
+            background-image: url('https://i.ibb.co/prrzCDP5/t-i-xu-ng.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        /* Lớp phủ trắng mờ nằm GIỮA ảnh nền và nội dung */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255, 255, 255, 0.75); /* 0.75 là độ mờ, chỉnh thấp xuống nếu muốn thấy ảnh rõ hơn */
+            z-index: 0;
+        }
+
+        /* Đảm bảo các phần tử chính nổi lên trên lớp phủ */
+        header, .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 2. Header & Logo T9(9ADD)ON */
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 5% 1rem;
+            position: sticky;
+            top: 0;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: -1.5px;
+            color: var(--accent-red);
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .logo span {
+            
+            background: linear-gradient(
+                to bottom, 
+                var(--accent-red) 0% 40%, 
+                var(--vn-gold) 40% 60%, 
+                var(--accent-red) 60% 100%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        /* 3. Thanh Navigation ngang */
+        nav {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            padding: 10px 18px;
+            border-radius: 8px;
+            background-color: var(--accent-red);
+            transition: var(--transition);
+            box-shadow: 0 4px 6px -1px rgba(218, 37, 29, 0.2);
+        }
+
+        nav a:hover {
+            background-color: #b91c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(218, 37, 29, 0.4);
+        }
+
+        /* 4. Bố cục Grid Trang Chủ */
+        .container {
+            padding: 30px 5%;
+        }
+
+        .home-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+            height: 75vh;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: var(--transition);
+            box-shadow: var(--shadow-smooth);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .box:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.02);
+            border-color: var(--accent-red);
+        }
+
+        .box-left {
+            grid-row: 1 / span 2;
+            background-image: url('https://i.ibb.co/prrzCDP5/t-i-xu-ng.jpg')
+        }
+        .box-left-holder img {
+            max-width: 100%;  
+            height: 200%; 
+            object-fit: contain; 
+            border-radius: inherit; 
+        }
+
+
+        /* 5. Trang nội dung */
+        .page-content {
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .page-content.active {
+            display: block !important;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .placeholder-text {
+            margin-top: 10vh;
+            font-size: 2.5rem;
+            color: var(--accent-red);
+            font-weight: 800;
+        }
+        .mautrang {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+       <a href="" <div class="logo">T9<span>9ADD</span>ON</div></a>
+        <nav>
+            <a href="#" onclick="showPage('home')">Trang chủ</a>
+            <a href="#" onclick="showPage('id-player')">ID Player</a>
+            <a href="caycon/Vleague.html" onclick="showPage('vleague')">V-League</a>
+            <a href="#" onclick="showPage('scoreboard')">Scoreboard</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div id="home" class="page-content active">
+            <div class="home-grid">
+                <div class="box box-left">
+                    <div class="box-left-holder"><div class="mautrang"><b><strong>VIỆT<br />NAM</strong><br />VÔ<br />ĐỊCH</b></div>
+                        </div>
+                </div>
+                <div class="box"><img src="https://i.ibb.co/prrzCDP5/t-i-xu-ng.jpg" width="90"></div>
+                <a href="https://youtube.com/@gmychannel8235?si=xAYJpMfoDPGOKTrW" target="_blank">
+                <div class="box"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" width="70"></div></a>
+            </div>
+        </div>
+
+        <div id="empty-page" class="page-content">
+            <h1 class="placeholder-text">ĐÂY LÀ TRANG TRỐNG</h1>
+            <p style="color: var(--text-muted); font-weight: 500;">Nội dung đang được cập nhật cho T99ADDON...</p>
+        </div>
+    </div>
+    
+    <div class="container">
+    <div id="home" class="page-content active">
+        </div>
+
+    <div id="id-player" class="page-content">
+        <h1 class="placeholder-text">ID PLAYER DATABASE</h1>
+        <p style="color: var(--text-muted)"><b>Coming soon</b> <br />- Dữ liệu cầu thủ đang được cập nhật.</p>
+        
+        <div class="box" style="margin-top: 20px; height: 300px;">
+            Nội dung danh sách ID sẽ nằm ở đây
+        </div>
+    </div>
+</div>
+
+
+    <script>
+    function showPage(pageId) {
+        // Ẩn tất cả các trang đang có
+        document.querySelectorAll('.page-content').forEach(p => {
+            p.classList.remove('active');
+        });
+
+        // Tìm trang có ID khớp với pageId (ví dụ: 'id-player')
+        const targetPage = document.getElementById(pageId);
+
+        if (targetPage) {
+            // Nếu tìm thấy trang đó thì hiển thị nó
+            targetPage.classList.add('active');
+        } else {
+            // Nếu không tìm thấy (chưa làm nội dung) thì hiện trang trống
+            document.getElementById('empty-page').classList.add('active');
+        }
+    }
+</script>
+
+</body>
+</html>
